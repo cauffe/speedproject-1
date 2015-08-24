@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ speed_object.title }}
+{% endblock %}
+
+{% block body %}
+
+	{{ speed_object.title }}
+	</br>
+	{{ speed_object.info }}
+	</br>
+	{{ speed_object.image.url }}
+	</br>
+	<img src="{{ speed_object.image.url }}">
+
+{% endblock %}

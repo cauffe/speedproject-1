@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block title %}List View{% endblock %}
+
+{% block body %}
+
+	{% for speed_object in speed_objects %}
+		<a href="/detail_view/{{ speed_object.pk }}">{{ speed_object.title }}</a>
+
+		{% if request.user.is_authenticated %}
+			--- <a href="/vote/{{ speed_object.pk }}?vote_type=up">Up: {{ speed_object.up_votes.count }}</a>
+			--- <a href="/vote/{{ speed_object.pk }}?vote_type=down">Down: {{ speed_object.down_votes.count }}</a>
+		{% endif %}
+
+		{% if request.user == speed_object.user %}
+			--- <a href="/update_view/{{ speed_object.pk }}/"> Edit </a> 
+			--- <a href="/delete_view/{{ speed_object.pk }}/"> Delete </a>
+		{% endif %}
+
+		</br>
+
+
+	{% endfor %}
+
+    {% if speed_objects.object_list and speed_objects.paginator.num_pages > 1 %}
+        <div class="pagination" style="margin-top: 20px; margin-left: -20px; ">
+            <span class="step-links">
+                {% if speed_objects.has_previous %}
+                    <a href= "?page={{ speed_objects.previous_page_number }}">newer entries &lt;&lt; </a>
+                {% endif %}
+
+              
+                    &nbsp;Page {{ speed_objects.number }} of {{ speed_objects.paginator.num_pages }}
+               
+
+                {% if speed_objects.has_next %}
+                    <a href="?page={{ speed_objects.next_page_number }}"> &gt;&gt; older entries</a>
+                {% endif %}
+            </span>
+        </div>
+        {% endif %}
+
+	</br>
+
+	<a href="/create_view2/">Create A Object</a>
+
+{% endblock %}

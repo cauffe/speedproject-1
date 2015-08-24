@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+
+	<form action="/update_view/{{ speed_object.pk }}/" enctype="multipart/form-data" method="POST" >
+	
+		{% comment %}
+			csrf_token is a randomly generated string of text that the server uses to confirm that the form was creaed by the django server and not a 3rd party / outside website, application or other data source.
+		{% endcomment %}
+		{% csrf_token %}	
+
+		
+		<input type='text' name='title' value='{{ speed_object.title }}' />
+		</br>
+		</br>
+
+		<textarea name='info' rows='10' cols='50'>
+
+			{{ speed_object.info }}
+
+		</textarea>
+		</br>
+		</br>
+		<input type="file" name="image" value="{{ speed_object.image.url }}">
+		</br>
+		</br>
+		<input type="submit" value="Update Object" />
+		</br>
+
+	</form>
+
+	{{ form.errors }}
+
+	{{ errors }}
+
+	<img src="{{ speed_object.image.url }}">
+
+{% endblock %}
