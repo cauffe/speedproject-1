@@ -28,10 +28,11 @@ urlpatterns = [
     url(r'^update_view/(?P<pk>\d+)/$', 'main.views.update_view'),
     url(r'^delete_view/(?P<pk>\d+)/$', 'main.views.delete_view'),
     url(r'^signup/$', 'main.views.signup'),
+
+    url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^logout/$', 'main.views.logout_view'),
-    url(r'^login/$', 'main.views.login_view'),
-
-
+    #url(r'^login/$', 'main.views.login_view'),
+    url(r'^login/$', 'main.views.login'),
     url(r'^vote/(?P<pk>\d+)/$', 'main.views.vote'),
 
 

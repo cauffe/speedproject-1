@@ -32,6 +32,15 @@ AUTH_USER_MODEL = 'main.CustomUser'
 
 # Application definition
 
+SOCIAL_AUTH_TWITTER_KEY = 'hcvgASeCyxkz4fGbsyA9yt9WD'
+SOCIAL_AUTH_TWITTER_SECRET = 'bvSuLB49sVBlyu7jILbJU2IpRH8BqGmBy0ClZ48KpnLTKFJAsx'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1650061208612712'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'f987f5e326bb6037323998f59d348bc7'
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_URL = '/login/'
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +49,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'social.apps.django_app.default',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,6 +61,26 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+)
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 ROOT_URLCONF = 'project.urls'
@@ -87,6 +117,10 @@ DATABASES = {
         'PORT': ''
     }
 }
+
+#SOCIAL_AUTH_TWITTER_KEY = 'update me'
+#SOCIAL_AUTH_TWITTER_SECRET = 'update me'
+
 
 
 # Internationalization

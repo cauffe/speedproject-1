@@ -70,13 +70,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.first_name
 
+    def get_full_name(self):
+        return "%s %s" % (self.first_name, self.last_name)
+
     def email_user(self, subject, message, from_email=None):
         send_mail(subject, message, from_email, [self.email])
 
 
 class SpeedModel(models.Model):
-    pass
-    #pk = models.IntegerField(auto_increment=True)
     title = models.CharField(max_length=255)
     info = models.TextField()
     image = models.ImageField(upload_to='image', null=True, blank=True)
